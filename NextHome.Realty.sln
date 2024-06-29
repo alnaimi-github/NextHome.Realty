@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.34804.81
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{7C0D9A4C-A5AD-44E4-A164-8C7D73A49BE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{7C32514C-DE2D-4042-B32F-AF87338CA7A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{D05DA641-2C43-4DC6-8BAD-BDE8BA9BC1AC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextHome.Realty.Domain", "Domain\NextHome.Realty.Domain.csproj", "{00899BDF-9181-44C0-9A06-8F881E024C9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextHome.Realty.Application", "Application\NextHome.Realty.Application.csproj", "{9DC124F3-E3AA-41A1-B011-D3417B7FBBCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextHome.Realty.Persistence", "NextHome.Realty.Infrastructure\NextHome.Realty.Persistence.csproj", "{FA1100A5-BB28-45B5-85A5-18BD4A90F755}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NextHome.Realty.Web", "NextHome.Realty.Web\NextHome.Realty.Web.csproj", "{AECC6444-6969-4A9A-A6C5-33C0B7229F0B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{00899BDF-9181-44C0-9A06-8F881E024C9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00899BDF-9181-44C0-9A06-8F881E024C9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00899BDF-9181-44C0-9A06-8F881E024C9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00899BDF-9181-44C0-9A06-8F881E024C9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DC124F3-E3AA-41A1-B011-D3417B7FBBCE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DC124F3-E3AA-41A1-B011-D3417B7FBBCE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DC124F3-E3AA-41A1-B011-D3417B7FBBCE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DC124F3-E3AA-41A1-B011-D3417B7FBBCE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA1100A5-BB28-45B5-85A5-18BD4A90F755}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA1100A5-BB28-45B5-85A5-18BD4A90F755}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA1100A5-BB28-45B5-85A5-18BD4A90F755}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA1100A5-BB28-45B5-85A5-18BD4A90F755}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AECC6444-6969-4A9A-A6C5-33C0B7229F0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AECC6444-6969-4A9A-A6C5-33C0B7229F0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AECC6444-6969-4A9A-A6C5-33C0B7229F0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AECC6444-6969-4A9A-A6C5-33C0B7229F0B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{00899BDF-9181-44C0-9A06-8F881E024C9E} = {7C0D9A4C-A5AD-44E4-A164-8C7D73A49BE6}
+		{9DC124F3-E3AA-41A1-B011-D3417B7FBBCE} = {7C0D9A4C-A5AD-44E4-A164-8C7D73A49BE6}
+		{FA1100A5-BB28-45B5-85A5-18BD4A90F755} = {7C32514C-DE2D-4042-B32F-AF87338CA7A4}
+		{AECC6444-6969-4A9A-A6C5-33C0B7229F0B} = {D05DA641-2C43-4DC6-8BAD-BDE8BA9BC1AC}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8FEED5D9-3160-440E-B9EE-8CBB73E37240}
+	EndGlobalSection
+EndGlobal
