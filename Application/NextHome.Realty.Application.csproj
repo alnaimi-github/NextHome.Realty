@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\NextHome.Realty.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

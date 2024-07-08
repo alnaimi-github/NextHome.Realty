@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\NextHome.Realty.Domain.csproj" />
+    <ProjectReference Include="..\Application\NextHome.Realty.Application.csproj" />
   </ItemGroup>
 
 </Project>

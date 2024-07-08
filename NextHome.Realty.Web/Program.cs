@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using NextHome.Realty.Application.Common.Interfaces;
 using NextHome.Realty.Persistence.Data;
+using NextHome.Realty.Persistence.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,7 +12,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(op =>
 {
     op.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStringDb"));
 });
-
+builder.Services.AddScoped<IVillaRepository, VillaRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -1,14 +1,16 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using NextHome.Realty.Application.Common.Interfaces;
 using NextHome.Realty.Domain.Entities;
 using NextHome.Realty.Persistence.Data;
+using NextHome.Realty.Persistence.Repository;
 
 namespace NextHome.Realty.Web.Controllers
 {
-    public class VillaController(ApplicationDbContext db) : Controller
+    public class VillaController(IVillaRepository villaRepository) : Controller
     {
         public IActionResult Index()
         {
-            var villas = db.Villas.ToList();
+            var villas = villaRepository.GetAll();
             return View(villas);
         }
         public IActionResult Create()
@@ -20,8 +22,8 @@ namespace NextHome.Realty.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Add(obj);
-                db.SaveChanges();
+                villaRepository.Add(obj);
+                villaRepository.Save();
                 TempData["success"] = "The villa has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -30,7 +32,7 @@ namespace NextHome.Realty.Web.Controllers
 
         public IActionResult Update(int? VillaId)
         {
-            var villa = db.Villas.FirstOrDefault(x => x.Id == VillaId);
+            var villa = villaRepository.Get(x => x.Id == VillaId);
             if (villa is null)
             {
                 return RedirectToAction("Error", "Home");
@@ -42,8 +44,8 @@ namespace NextHome.Realty.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Update(obj);
-                db.SaveChanges();
+                villaRepository.Update(obj);
+                villaRepository.Save();
                 TempData["success"] = "The villa has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -52,7 +54,7 @@ namespace NextHome.Realty.Web.Controllers
 
         public IActionResult Delete(int? VillaId)
         {
-            var villa = db.Villas.FirstOrDefault(x => x.Id == VillaId);
+            var villa = villaRepository.Get(x => x.Id == VillaId);
             if (villa is null)
             {
                 return RedirectToAction("Error", "Home");
@@ -62,11 +64,11 @@ namespace NextHome.Realty.Web.Controllers
         [HttpPost]
         public IActionResult Delete(Villa obj)
         {
-            var villa = db.Villas.FirstOrDefault(x => x.Id == obj.Id);
+            var villa = villaRepository.Get(x => x.Id == obj.Id);
             if (villa is not null)
             {
-                db.Remove(villa!);
-                db.SaveChanges();
+                villaRepository.Remove(villa);
+                villaRepository.Save();
                 TempData["success"] = "The villa has been deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }
