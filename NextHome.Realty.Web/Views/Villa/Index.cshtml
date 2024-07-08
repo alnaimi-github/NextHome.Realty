@@ -1,0 +1,74 @@
+﻿@model IEnumerable<Villa>
+
+<br />
+<div class="w-100 card border-0  p-4 border">
+    <div class="card-header bg-dark bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-primary text-center py-2">Villa List</h2>
+            </div>
+        </div>
+    </div>
+   <div class="card-body border p-2">
+      
+       <div class="row pb-3">
+           <div class="col-6 offset-6 text-end">
+                <a asp-controller="Villa" asp-action="Create" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i> Create New Villa
+                </a>
+           </div>
+       </div>
+
+       <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Occupancy
+                    </th>
+                    <th>
+                        Sqft
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item.Name
+                        </td>
+                        <td>
+                            @item.Occupancy
+                        </td>
+                        <td>
+                            @item.Sqft
+                        </td>
+                        <td>
+                            @((item.Price).ToString("C"))
+                        </td>
+                        <td>
+                          <div class="w-75 btn-group" role="group">
+                                <a class="btn btn-primary" asp-controller="Villa" asp-action="Update" asp-route-VillaId="@item.Id">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-controller="Villa" asp-action="Delete" asp-route-VillaId="@item.Id" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                          </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+   </div>
+</div>
+    
+

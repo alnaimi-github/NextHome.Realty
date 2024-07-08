@@ -1,0 +1,67 @@
+﻿@model IEnumerable<VillaNumber>
+
+<br />
+<div class="w-100 card border-0  p-4 border">
+    <div class="card-header bg-dark bg-gradient m-lg-0 py-3">
+        <div class="row">
+            <div class="col-12">
+                <h2 class="text-primary text-center py-2">Villa Number List</h2>
+            </div>
+        </div>
+    </div>
+   <div class="card-body border p-2">
+      
+       <div class="row pb-3">
+           <div class="col-6 offset-6 text-end">
+                <a asp-controller="VillaNumber" asp-action="Create" class="btn btn-secondary">
+                    <i class="bi bi-plus-circle"></i> Create New Villa Number
+                </a>
+           </div>
+       </div>
+
+       <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                     Villa Name
+                    </th>
+                    <th>
+                       Villa Number
+                    </th>
+                    <th>
+                       Special Details
+                    </th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @item!.Villa!.Name
+                        </td>
+                        <td>
+                            @item.Villa_Number
+                        </td>
+                        <td>
+                            @item.SpecialDetails
+                        </td>
+                        <td>
+                          <div class="w-75 btn-group" role="group">
+                                    <a class="btn btn-primary" asp-controller="VillaNumber" asp-action="Update" asp-route-VillaNumberId="@item.Villa_Number">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-controller="VillaNumber" asp-action="Delete" asp-route-VillaNumberId="@item.Villa_Number" class="btn btn-outline-danger">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                          </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+   </div>
+</div>
+   

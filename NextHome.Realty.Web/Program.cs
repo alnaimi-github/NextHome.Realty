@@ -1,7 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using NextHome.Realty.Persistence.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<ApplicationDbContext>(op =>
+{
+    op.UseSqlServer(builder.Configuration.GetConnectionString("ConnectionStringDb"));
+});
 
 var app = builder.Build();
 
