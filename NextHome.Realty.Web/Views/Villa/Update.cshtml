@@ -10,9 +10,11 @@
     </div>
 
     <div class="card-body border p-4">
-        <form method="post" action="" class="row">
+        <form method="post" action="" enctype="multipart/form-data" class="row">
             <input asp-for="Id" hidden/>
-            <div class="p-3">
+             <div class="row">
+                <div class="col-10">
+            <div class="p-3 shadow">
                 <div class="form-floating py-1 col-12">
                     <input asp-for="Name" class="form-control border shadow" />
                     <label asp-for="Name" class="ms-2"></label>
@@ -39,9 +41,8 @@
                     <span class="text-danger" asp-validation-for="Occupancy"></span>
                 </div>
                 <div class="form-floating py-1 col-12">
-                    <input asp-for="ImageUrl" class="form-control border shadow" />
-                    <label asp-for="ImageUrl" class="ms-2"></label>
-                    <span class="text-danger" asp-validation-for="ImageUrl"></span>
+                    <input  type="file" name="files" multiple class="form-control border shadow" />
+                    <label asp-for="VillaImages" class="ms-2"></label>
                 </div>
                 <div class="row pt-2">
                     <div class="col-6 col-md-3">
@@ -55,6 +56,30 @@
                         </a>
                     </div>
 
+                </div>
+                 </div>
+                  </div>
+                 <div class="col-2">
+                    @if (Model.VillaImages!.Count>0)
+                    {
+                        foreach (var image in Model.VillaImages)
+                        {
+                            <div class="border p-1 m-2 text-center">
+                                <img src="@image.ImageUrl" width="100%"
+                                     style="border-radius:5px; border:1px solid #bbb9b9" />
+                                <a asp-controller="Villa" asp-action="DeleteImage" class="btn btn-danger" asp-route-imageId="@image.Id">
+                                    <i class="bi bi-trash-fill"></i> Delete
+                                </a>
+                            </div>
+                        }
+                    }
+                   else
+                    {
+                        <div class="border p-1 m-2 text-center">
+                                    <img src="~/images/placeholder.png" width="100%"
+                                     style="border-radius:5px; border:1px solid #bbb9b9" />
+                            </div>  
+                    }
                 </div>
             </div>
         </form>

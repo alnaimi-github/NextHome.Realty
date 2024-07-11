@@ -4,9 +4,10 @@ using NextHome.Realty.Persistence.Data;
 
 namespace NextHome.Realty.Persistence.Repository
 {
-    public class VillaRepository(ApplicationDbContext db) : Repository<Villa>(db), IVillaRepository
+    public class VillaNumberRepository(ApplicationDbContext db) :
+        Repository<VillaNumber>(db), IVillaNumberRepository
     {
-        public Task UpdateAsync(Villa entity)
+        public Task UpdateAsync(VillaNumber entity)
         {
             db.Update(entity);
             return Task.CompletedTask;

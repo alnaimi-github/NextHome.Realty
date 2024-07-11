@@ -1,35 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using NextHome.Realty.Domain.Entities;
-using NextHome.Realty.Persistence.Data;
+using NextHome.Realty.Application.Common.Interfaces;
 using NextHome.Realty.Web.ViewModels;
 
 namespace NextHome.Realty.Web.Controllers
 {
-    public class VillaNumberController(ApplicationDbContext db) : Controller
+    public class VillaNumberController(IUnitOfWork unitOfWork) : Controller
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var villaNumbers = db.VillaNumbers.Include(x => x.Villa).ToList();
+            var villaNumbers = await unitOfWork.VillaNumber.GetAllAsync(includeProperties: "Villa");
             return View(villaNumbers);
         }
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             var villaNumberVM = new VillaNumberVM
             {
-                VillaList = db.Villas.ToList().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
+                VillaList = (await unitOfWork.Villa.GetAllAsync())
+                .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
             };
             return View(villaNumberVM);
         }
         [HttpPost]
-        public IActionResult Create(VillaNumberVM obj)
+        public async Task<IActionResult> Create(VillaNumberVM obj)
         {
-            var roomNumberExists = db.VillaNumbers.Any(x => x.Villa_Number == obj.VillaNumber!.Villa_Number);
+            var roomNumberExists = await unitOfWork.VillaNumber.AnyAsync(x => x.Villa_Number == obj.VillaNumber!.Villa_Number);
             if (ModelState.IsValid && !roomNumberExists)
             {
-                db.Add(obj.VillaNumber!);
-                db.SaveChanges();
+                await unitOfWork.VillaNumber.AddAsync(obj.VillaNumber!);
+                await unitOfWork.SaveAsync();
                 TempData["success"] = "The villa number has been created successfully.";
                 return RedirectToAction(nameof(Index));
             }
@@ -39,17 +38,19 @@ namespace NextHome.Realty.Web.Controllers
             }
             var villaNumberVM = new VillaNumberVM
             {
-                VillaList = db.Villas.ToList().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
+                VillaList = (await unitOfWork.Villa.GetAllAsync())
+                .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
             };
             return View(villaNumberVM);
         }
 
-        public IActionResult Update(int? VillaNumberId)
+        public async Task<IActionResult> Update(int? VillaNumberId)
         {
             var villaNumberVM = new VillaNumberVM
             {
-                VillaList = db.Villas.ToList().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
-                VillaNumber = db.VillaNumbers.FirstOrDefault(x => x.Villa_Number == VillaNumberId)
+                VillaList = (await unitOfWork.Villa.GetAllAsync())
+                .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
+                VillaNumber = await unitOfWork.VillaNumber.GetAsync(x => x.Villa_Number == VillaNumberId)
             };
 
             if (villaNumberVM.VillaNumber is null)
@@ -59,24 +60,25 @@ namespace NextHome.Realty.Web.Controllers
             return View(villaNumberVM);
         }
         [HttpPost]
-        public IActionResult Update(VillaNumberVM obj)
+        public async Task<IActionResult> Update(VillaNumberVM obj)
         {
             if (ModelState.IsValid)
             {
-                db.Update(obj.VillaNumber!);
-                db.SaveChanges();
+                await unitOfWork.VillaNumber.UpdateAsync(obj.VillaNumber!);
+                await unitOfWork.SaveAsync();
                 TempData["success"] = "The villa number has been updated successfully.";
                 return RedirectToAction(nameof(Index));
             }
             return View(obj);
         }
 
-        public IActionResult Delete(int? VillaNumberId)
+        public async Task<IActionResult> Delete(int? VillaNumberId)
         {
             var villaNumberVM = new VillaNumberVM
             {
-                VillaList = db.Villas.ToList().Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
-                VillaNumber = db.VillaNumbers.FirstOrDefault(x => x.Villa_Number == VillaNumberId)
+                VillaList = (await unitOfWork.Villa.GetAllAsync())
+                .Select(x => new SelectListItem { Text = x.Name, Value = x.Id.ToString() }),
+                VillaNumber = await unitOfWork.VillaNumber.GetAsync(x => x.Villa_Number == VillaNumberId)
             };
             if (villaNumberVM.VillaNumber is null)
             {
@@ -85,13 +87,13 @@ namespace NextHome.Realty.Web.Controllers
             return View(villaNumberVM);
         }
         [HttpPost]
-        public IActionResult Delete(VillaNumberVM obj)
+        public async Task<IActionResult> Delete(VillaNumberVM obj)
         {
-            var villa = db.VillaNumbers.FirstOrDefault(x => x.Villa_Number == obj.VillaNumber!.Villa_Number);
+            var villa = await unitOfWork.VillaNumber.GetAsync(x => x.Villa_Number == obj.VillaNumber!.Villa_Number);
             if (villa is not null)
             {
-                db.Remove(villa!);
-                db.SaveChanges();
+                await unitOfWork.VillaNumber.RemoveAsync(villa!);
+                await unitOfWork.SaveAsync();
                 TempData["success"] = "The villa number has been deleted successfully.";
                 return RedirectToAction(nameof(Index));
             }

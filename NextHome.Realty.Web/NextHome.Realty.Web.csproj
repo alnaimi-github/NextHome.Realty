@@ -19,4 +19,8 @@
     <ProjectReference Include="..\NextHome.Realty.Infrastructure\NextHome.Realty.Persistence.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\VillaImages\villas\" />
+  </ItemGroup>
+
 </Project>

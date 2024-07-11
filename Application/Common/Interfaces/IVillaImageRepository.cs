@@ -2,8 +2,8 @@
 
 namespace NextHome.Realty.Application.Common.Interfaces
 {
-    public interface IVillaRepository : IRepository<Villa>
+    public interface IVillaImageRepository : IRepository<VillaImage>
     {
-        Task UpdateAsync(Villa entity);
+        Task UpdateAsync(VillaImage obj);
     }
 }
