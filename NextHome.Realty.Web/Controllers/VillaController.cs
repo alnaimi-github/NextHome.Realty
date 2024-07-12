@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using NextHome.Realty.Application.Common.Interfaces;
 using NextHome.Realty.Domain.Entities;
@@ -6,6 +7,7 @@ using NextHome.Realty.Web.Extensions;
 
 namespace NextHome.Realty.Web.Controllers
 {
+    [Authorize]
     public class VillaController(IUnitOfWork unitOfWork, IWebHostEnvironment webHostEnvironment) : Controller
     {
         public async Task<IActionResult> Index()

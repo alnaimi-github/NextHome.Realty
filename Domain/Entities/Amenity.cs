@@ -3,10 +3,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NextHome.Realty.Domain.Entities;
 
-public class VillaImage
+public class Amenity
 {
-    public int Id { get; set; }
-    [Required] public string ImageUrl { get; set; } = string.Empty;
-    public int VillaId { get; init; }
+    [Key]public int Id { get; set; }
+    public string Name { get; set; } = string.Empty;
+    public string? Description { get; set; } = string.Empty;
+    public int VillaId { get; set; }
     [ForeignKey(nameof(VillaId))] public Villa? Villa { get; set; }
 }

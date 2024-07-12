@@ -7,20 +7,21 @@ namespace NextHome.Realty.Persistence.Repository
 {
     public class Repository<T>(ApplicationDbContext db) : IRepository<T> where T : class
     {
-        internal DbSet<T> DbSet = db.Set<T>();
+        private readonly DbSet<T> _dbSet = db.Set<T>();
+
         public async Task AddAsync(T entity)
         {
-            await DbSet.AddAsync(entity);
+            await _dbSet.AddAsync(entity);
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> filter)
         {
-            return await DbSet.AnyAsync(filter);
+            return await _dbSet.AnyAsync(filter);
         }
 
         public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
-            IQueryable<T> query = DbSet;
+            IQueryable<T> query = _dbSet;
 
             if (filter != null)
             {
@@ -41,7 +42,7 @@ namespace NextHome.Realty.Persistence.Repository
 
         public async Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
         {
-            IQueryable<T> query = DbSet;
+            IQueryable<T> query = _dbSet;
             if (filter != null)
             {
                 query = query.Where(filter);
@@ -60,7 +61,7 @@ namespace NextHome.Realty.Persistence.Repository
 
         public Task RemoveAsync(T entity)
         {
-            DbSet.Remove(entity);
+            _dbSet.Remove(entity);
             return Task.CompletedTask;
         }
     }

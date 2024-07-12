@@ -1,61 +1,72 @@
 ﻿<!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>@ViewData["Title"] - NextHome.Realty.Web</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/NextHome.Realty.Web.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/bootstrap-icons/font/bootstrap-icons.css" />
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/NextHome.Realty.Web.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/bootstrap-icons/font/bootstrap-icons.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 </head>
 <body>
-    <header>
+<header>
 
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand text-secondary" asp-area="" asp-controller="Home" asp-action="Index"><img src="~/images/resort.png" style="width:35px;" /></a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-secondary" asp-controller="Villa" asp-action="Index">Villa</a>
-                        </li>
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand text-secondary" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/resort.png" style="width: 35px;"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-light" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span> Content Management</span>
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li class="nav-item">
-                            <a class="nav-link text-secondary" asp-controller="VillaNumber" asp-action="Index">Villa Number</a>
-                        </li>
-                    </ul>
-                </div>
+                                <a class="nav-link text-secondary" asp-controller="Villa" asp-action="Index">Villa</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" asp-controller="VillaNumber" asp-action="Index">Villa Number</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-secondary" asp-controller="Amenity" asp-action="Index">Amenity</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <partial name="_LoginPartial"/>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-           <partial name="_Notification"/>
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="footer text-muted bg-dark" data-bs-theme="dark">
-        <div class="text-center">
-            <span style="color:darkgray"> ASP .NET © Project | Made with <i class="bi bi-heart-fill"></i> By Al Nuaimi</span>
         </div>
-    </footer>
+    </nav>
+</header>
+<div class="">
+    <main role="main">
+            <partial name="_NotificationPartial" />
+        @RenderBody()
+    </main>
+</div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+<footer class="footer text-muted bg-dark" data-bs-theme="dark">
+    <div class="text-center">
+        <span style="color: darkgray"> ASP .NET © Project | Made with <i class="bi bi-heart-fill"></i> By Al Nuaimi</span>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script src="/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+@await RenderSectionAsync("Scripts", false)
 </body>
 </html>
