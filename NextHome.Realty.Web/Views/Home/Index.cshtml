@@ -25,9 +25,7 @@
         </button>
     </div>
 
-    <form method="post" style="background-color:black"
-          asp-action="GetVillasByDate" data-ajax-method="post" data-ajax="true"
-          data-ajax-mode="replace" data-ajax-update="#VillasList">
+    <form  style="background-color:black">
         <div class="row p-0 mx-0 py-4">
 
             <div class="col-12 col-md-5  offset-md-1 pl-2  pr-2 pr-md-0">
@@ -40,7 +38,7 @@
             <div class="col-8 col-md-3 pl-2 pr-2">
                 <div class="form-group">
                     <label>No. of nights</label>
-                    <select class="form-select">
+                    <select class="form-select" asp-for="Nights">
                         @for (var x = 1; x < 11; x++)
                         {
                             <option value="@x">@x</option>
@@ -51,7 +49,7 @@
 
             <div class="col-4 col-md-2 pt-4 pr-2">
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-block">
+                    <button type="button" onclick="fnLoadVillaList()" class="btn btn-success btn-block">
                         <i class="bi bi-search"></i>  &nbsp; Check Availability
                     </button>
 
@@ -62,3 +60,32 @@
        <partial name="_VillasListPartial" model="Model"/>
     </form>
 </div>
+
+                
+
+
+@section Scripts
+{
+    <script>
+        function fnLoadVillaList() {
+            $('.spinner').show();
+            var objData = {
+                checkInDate: $("#CheckInDate").val(),
+                nights: $("#Nights").val()
+            };
+
+            $.ajax({
+                url: '@Url.Action("GetVillasByDate", "Home")',
+                data: objData,
+                type: 'POST',
+                success: function (data) {
+                    $("#VillasList").empty();
+                    $("#VillasList").html(data);
+                    $('.spinner').hide();
+                }
+            });
+        }
+
+
+    </script>
+}

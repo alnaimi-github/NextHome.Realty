@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/NextHome.Realty.Web.styles.css" asp-append-version="true"/>
     <link rel="stylesheet" href="~/bootstrap-icons/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="~/css/spinner.css"/>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
 </head>
 <body>
@@ -51,7 +52,8 @@
 </header>
 <div class="">
     <main role="main">
-            <partial name="_NotificationPartial" />
+        <div class="loading spinner" style="display: none;"></div>
+        <partial name="_NotificationPartial"/>
         @RenderBody()
     </main>
 </div>
@@ -66,7 +68,7 @@
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-<script src="/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script>
+@* <script src="/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script> *@
 @await RenderSectionAsync("Scripts", false)
 </body>
 </html>
