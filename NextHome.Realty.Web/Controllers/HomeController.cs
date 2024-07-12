@@ -18,13 +18,7 @@ namespace NextHome.Realty.Web.Controllers
             };
             return View(homeVM);
         }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(HomeVM homeVm)
-        {
-            homeVm.VillaList = await unitOfWork.Villa.GetAllAsync(includeProperties: "VillaAmenity,VillaImages");
-            return View(homeVm);
-        }
+      
         [HttpPost]
         public async Task<IActionResult> GetVillasByDate(int nights,DateOnly checkInDate)
         {
