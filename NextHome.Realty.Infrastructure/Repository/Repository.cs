@@ -19,9 +19,17 @@ namespace NextHome.Realty.Persistence.Repository
             return await _dbSet.AnyAsync(filter);
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        public async Task<IEnumerable<T>> GetAllAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false)
         {
             IQueryable<T> query = _dbSet;
+            if (tracked)
+            {
+                query = _dbSet;
+            }
+            else
+            {
+                query=_dbSet.AsNoTracking();
+            }
 
             if (filter != null)
             {
@@ -40,9 +48,17 @@ namespace NextHome.Realty.Persistence.Repository
         }
 
 
-        public async Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null)
+        public async Task<T> GetAsync(Expression<Func<T, bool>>? filter = null, string? includeProperties = null, bool tracked = false)
         {
             IQueryable<T> query = _dbSet;
+            if (tracked)
+            {
+                query = _dbSet;
+            }
+            else
+            {
+                query = _dbSet.AsNoTracking();
+            }
             if (filter != null)
             {
                 query = query.Where(filter);

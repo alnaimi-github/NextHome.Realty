@@ -1,0 +1,108 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@using NextHome.Realty.Application.Common.Utility
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - NextHome.Realty.Web</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/NextHome.Realty.Web.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/bootstrap-icons/font/bootstrap-icons.css"/>
+    <link rel="stylesheet" href="~/css/spinner.css"/>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="~/datatables/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="~/css/apexcharts.css" />
+</head>
+<body>
+<header>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-dark border-bottom box-shadow">
+        <div class="container-fluid d-flex justify-content-between">
+            <a class="navbar-brand text-secondary" asp-area="" asp-controller="Home" asp-action="Index">
+                <img src="~/images/resort.png" style="width: 35px;"/>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <partial name="_LoginPartialAdmin"/>
+    </nav>
+</header>
+<div class="container-fluid">
+    <div class="loading spinner" style="display: none;"></div>
+    <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+            <div class="position-static pt-3">
+                <ul class="navbar-nav">
+                    <li>
+                        <div class="text-muted small fw-bold text-uppercase px-3">
+                            Menu
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" asp-controller="Dashboard" asp-action="Index">
+                            <span class="me-2"><i class="bi bi-speedometer2"></i></span>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="text-muted small fw-bold text-uppercase px-3">
+                            Content Management
+                        </div>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" asp-controller="Villa" asp-action="Index">
+                            <span class="me-2"><i class="bi bi-house-door"></i></span>
+                            <span>Villa</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" asp-controller="VillaNumber" asp-action="Index">
+                            <span class="me-2"><i class="bi bi-list-ol"></i></span>
+                                <span>VillaNumber</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-secondary" asp-controller="Amenity" asp-action="Index">
+                            <span class="me-2"><i class="bi bi-building"></i></span>
+                                <span>Amenity</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                            <a class="nav-link text-secondary" asp-controller="Booking" asp-action="Index" asp-route-status="all">
+                            <span class="me-2"><i class="bi bi-journal-plus"></i></span>
+                            <span>Booking</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 w-100">
+                <partial name="_NotificationPartial"/>
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+</div>
+
+<footer class="footer text-muted bg-dark" data-bs-theme="dark">
+    <div class="text-center">
+        <span style="color: darkgray"> ASP .NET © Project | Made with <i class="bi bi-heart-fill"></i> By Al Nuaimi</span>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/datatables/js/jquery.datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+@* <script src="/jquery-ajax-unobtrusive/dist/jquery.unobtrusive-ajax.min.js"></script> *@
+    <script src="~/js/apexcharts.js"></script>
+@await RenderSectionAsync("Scripts", false)
+</body>
+</html>

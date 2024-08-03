@@ -4,6 +4,8 @@ using NextHome.Realty.Application.Common.Interfaces;
 using NextHome.Realty.Domain.Entities;
 using NextHome.Realty.Persistence.Data;
 using NextHome.Realty.Persistence.Repository;
+using Stripe;
+using Syncfusion.Licensing;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -27,9 +29,12 @@ builder.Services.Configure<IdentityOptions>(option =>
     option.Password.RequiredLength = 6;
     
 });
-
+StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
+SyncfusionLicenseProvider.RegisterLicense(builder.Configuration["LicenceKey:SyncfusionKey"]);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

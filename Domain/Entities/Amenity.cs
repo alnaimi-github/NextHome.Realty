@@ -8,6 +8,6 @@ public class Amenity
     [Key]public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
     public string? Description { get; set; } = string.Empty;
-    public int VillaId { get; set; }
-    [ForeignKey(nameof(VillaId))] public Villa? Villa { get; set; }
+    [ForeignKey(nameof(VillaId))] public int VillaId { get; set; }
+    public Villa? Villa { get; set; }
 }

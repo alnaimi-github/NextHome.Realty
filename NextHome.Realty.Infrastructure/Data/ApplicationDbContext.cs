@@ -12,6 +12,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
     public DbSet<VillaImage> VillaImages { get; set; }
     public DbSet<Amenity> Amenities { get; set; }
     public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+    public DbSet<Booking> Bookings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -129,17 +130,17 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options
             new Amenity
             {
                 Id = 9,
-                VillaId = 7,
+                VillaId = 3,
                 Name = "Private Pool"
             }, new Amenity
             {
                 Id = 10,
-                VillaId = 7,
+                VillaId = 3,
                 Name = "Jacuzzi"
             }, new Amenity
             {
                 Id = 11,
-                VillaId = 7,
+                VillaId = 3,
                 Name = "Private Balcony"
             });
     }

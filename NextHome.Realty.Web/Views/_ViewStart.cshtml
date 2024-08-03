@@ -1,3 +1,4 @@
-﻿@{
-    Layout = "_Layout";
+﻿@using NextHome.Realty.Application.Common.Utility
+@{
+    Layout = User.IsInRole(SD.RoleType.Admin.ToString()) ? "_LayoutAdmin" : "_Layout";
 }

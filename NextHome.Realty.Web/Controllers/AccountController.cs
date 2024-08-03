@@ -38,13 +38,22 @@ namespace NextHome.Realty.Web.Controllers
                         loginVm.RememberMe, false);
                 if (result.Succeeded)
                 {
-                    if (string.IsNullOrEmpty(loginVm.RedirectUrl))
+                    var user = await userManager.FindByEmailAsync(loginVm.Email);
+                    if (await userManager.IsInRoleAsync(user!,SD.RoleType.Admin.ToString()))
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Dashboard");
                     }
                     else
                     {
-                        return LocalRedirect(loginVm.RedirectUrl);
+
+                        if (string.IsNullOrEmpty(loginVm.RedirectUrl))
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                        else
+                        {
+                            return LocalRedirect(loginVm.RedirectUrl);
+                        }
                     }
                 }
                 else
