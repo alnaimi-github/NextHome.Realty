@@ -15,7 +15,7 @@
                         }
                         else
                         {
-                            <img class="d-block w-100" style="border-radius: 5px;" src="Images/placeholder.png" />
+                            <img class="d-block w-100" style="border-radius: 5px;" src="Images/placeholder.png"/>
                         }
                     </div>
                     <div class="col-8">
@@ -53,8 +53,8 @@
                                 }
                             </div>
                             <div class="col-4">
-                                <span class="text-white">Max Occupancy : @villa.Occupancy adults </span><br />
-                                <span class=" pt-1 text-white">Villa Size : @villa.Sqft sqft</span><br />
+                                <span class="text-white">Max Occupancy : @villa.Occupancy adults </span><br/>
+                                <span class=" pt-1 text-white">Villa Size : @villa.Sqft sqft</span><br/>
                             </div>
                             <div class="col-4">
                                 <span class="text-warning float-end font-weight-bold pt-1" style="font-size: 25px;">
@@ -76,9 +76,13 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body m-0">
-                            <partial name="_VillaDetailsPartial" model="villa" />
+                            <partial name="_VillaDetailsPartial" model="villa"/>
                         </div>
                         <div class="modal-footer">
+                            <button asp-controller="Home" asp-action="GeneratePPTExport"
+                                    asp-route-id="@villa.Id" type="submit" class="btn btn-outline-warning">
+                                <i class="bi bi-file-earmark-ppt"></i> Download Villa PPT
+                            </button>
                             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Close</button>
                         </div>
                     </div>

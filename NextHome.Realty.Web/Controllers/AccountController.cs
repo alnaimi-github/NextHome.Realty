@@ -65,16 +65,11 @@ namespace NextHome.Realty.Web.Controllers
             return View(loginVm);
         }
 
-        public async Task<IActionResult> Register(string? returnUrl)
+        public IActionResult Register(string? returnUrl)
         {
             returnUrl ??= Url.Content("~/");
-            if (!await roleManager.RoleExistsAsync(SD.RoleType.Admin.ToString()))
-            {
-                await roleManager.CreateAsync(new IdentityRole(SD.RoleType.Admin.ToString()));
-                await roleManager.CreateAsync(new IdentityRole(SD.RoleType.Customer.ToString()));
-            }
 
-            var registerMV = new RegisterVM
+            var registerVm = new RegisterVM
             {
                 RoleListItems = roleManager.Roles.Select(x =>
                     new SelectListItem { Text = x.Name, Value = x.Name }
@@ -82,7 +77,7 @@ namespace NextHome.Realty.Web.Controllers
                 RedirectUrl = returnUrl
             };
 
-            return View(registerMV);
+            return View(registerVm);
         }
 
         [HttpPost]

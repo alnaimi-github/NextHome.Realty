@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using NextHome.Realty.Application.Common.Interfaces;
+using NextHome.Realty.Application.Services.Implementation;
+using NextHome.Realty.Application.Services.Interfaces;
 using NextHome.Realty.Domain.Entities;
 using NextHome.Realty.Persistence.Data;
 using NextHome.Realty.Persistence.Repository;
@@ -24,16 +26,13 @@ builder.Services.ConfigureApplicationCookie(option =>
     option.AccessDeniedPath = "/Account/AccessDenied";
     option.LoginPath = "/Account/Login";
 });
-builder.Services.Configure<IdentityOptions>(option =>
-{
-    option.Password.RequiredLength = 6;
-    
-});
+builder.Services.Configure<IdentityOptions>(option => { option.Password.RequiredLength = 6; });
 StripeConfiguration.ApiKey = builder.Configuration["Stripe:SecretKey"];
 SyncfusionLicenseProvider.RegisterLicense(builder.Configuration["LicenceKey:SyncfusionKey"]);
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
 var app = builder.Build();
-
 
 
 // Configure the HTTP request pipeline.
@@ -48,11 +47,19 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 app.UseAuthorization();
-
+await SeedDatabase();
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    "default",
+    "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+
+
+async Task  SeedDatabase()
+{
+    await using var scope =  app.Services.CreateAsyncScope();
+    var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+   await dbInitializer.Initialize();
+}
